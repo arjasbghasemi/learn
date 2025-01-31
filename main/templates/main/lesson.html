@@ -1,0 +1,126 @@
+{% extends 'master.html' %}
+{% block content %}
+    <!-- Start main-content -->
+    <main class="main-content dt-sl mb-3">
+        <div class="container main-container">
+            <!-- Start title - breadcrumb -->
+            <div class="title-breadcrumb-special dt-sl">
+                <div class="breadcrumb dt-sl">
+                    <nav>
+                        {% if lesson.menu %}
+                                        <a href="#">{{ lesson.menu }}</a>
+                                    {% endif %}
+                    {% if lesson.category %}
+                                        <a href="#">{{ lesson.category }}</a>
+                                    {% endif %}
+                    {% if lesson.subcategory %}
+                                        <a href="#">{{ lesson.subcategory }}</a>
+                                    {% endif %}
+                    {% if lesson.title %}
+                                        <a href="#">{{ lesson.title }}</a>
+                                    {% endif %}
+                    </nav>
+                </div>
+                <div class="title-page dt-sl">
+                    <h1>{{ lesson.title }}</h1>
+                </div>
+
+            </div>
+            <!-- End title - breadcrumb -->
+            <div class="row">
+                <div class="col-lg-9 col-md-8 col-sm-12 col-12 mb-3">
+                    <div class="content-page">
+                        <div class="content-desc dt-sn dt-sl">
+                            <header class="entry-header dt-sl mb-3">
+                                <div class="post-meta date">
+                                    <i class="mdi mdi-calendar-month"></i>{{ lesson.date }}
+                                </div>
+
+                                <div class="post-meta category">
+                                    <i class="mdi mdi-folder"></i>
+                                    {% if lesson.menu %}
+                                        <a href="#">{{ lesson.menu }}</a>
+                                    {% endif %}
+                                    {% if lesson.category %}
+                                        <a href="#">{{ lesson.category }}</a>
+                                    {% endif %}
+                                    {% if lesson.category %}
+                                        ، <a href="#">{{ lesson.subcategory }}</a>
+
+                                    {% endif %}
+                                    {% if lesson.subsubcategory %}
+                                        ، <a href="#">{{ lesson.subsubcategory }}</a>
+                                    {% endif %}
+
+                                </div>
+                                <div class="post-meta category">
+                                    <i class="mdi mdi-eye"></i>
+                                    {{ lesson.views }} بازدید
+                                </div>
+                            </header>
+                            {% if lesson.image %}
+                                <div class="post-thumbnail dt-sl">
+                                    <img src="{{ lesson.image.url }}" alt="">
+                                </div>
+                            {% endif %}
+
+                            {% if lesson.video %}
+                                <div class="pt-3 pb-2">
+                                    <h5>ویدیو آموزشی:</h5>
+                                    <video style="width: 100%; height: 560px" controls>
+                                        <source src="{{ lesson.video.url }}" type="video/mp4">
+                                    </video>
+                                </div>
+                            {% endif %}
+
+                            {% if lesson.voice %}
+                                <div class="pt-3 pb-2">
+                                    <h5>صدا آموزشی:</h5>
+                                    <audio style="width: 100%" controls>
+                                        <source src="{{ lesson.voice.url }}" type="audio/mpeg">
+                                    </audio>
+                                </div>
+                            {% endif %}
+
+                            {{ lesson.text }}
+                        </div>
+                    </div>
+                </div>
+                {% if lessons %}
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12 mb-3 sidebar sticky-sidebar">
+                        <div class="widget-posts dt-sn dt-sl rounded-0 border-bottom mb-3">
+                            <div class="title-sidebar dt-sl mb-3">
+                                <h3>جدیدترین ها</h3>
+                            </div>
+                            <div class="content-sidebar dt-sl">
+                                {% for lesso in lessons %}
+                                    <div class="item">
+                                        <div class="item-inner">
+                                            <div class="item-thumb">
+                                                <a href="{% url 'lesson' lesso.pk %}" class="img-holder"
+                                                   style="background-image: url('{% if lesso.image %}{{ lesso.image.url }}{% endif %}')"></a>
+                                            </div>
+                                            <p class="title">
+                                                <a href="{% url 'lesson' lesso.pk %}">{{ lesso.title }}</a>
+                                            </p>
+                                            <div class="item-meta">
+                                                <span class="time">{{ lesso.date }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </main>
+    <!-- End main-content -->
+{% endblock %}
+
+

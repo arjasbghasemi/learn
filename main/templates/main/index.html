@@ -1,0 +1,72 @@
+{% extends 'master.html' %}
+{% block content %}
+    <!-- Start main-content -->
+    <main class="main-content dt-sl mb-3">
+        <div class="container main-container">
+            <div class="row mt-5 pt-5">
+                <div class="col-lg-9 col-md-8 col-sm-12 col-12 mb-3">
+                    <div class="row">
+                        {% if lessons %}
+                            {% for lesson in lessons %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="post-card">
+                                <div class="post-thumbnail">
+                                    <a href="{% url 'lesson' lesson.pk %}">
+                                        <img src=" {% if lesson.image %}
+                                        	{{ lesson.image.url }}
+                                        {% endif %} " alt="">
+                                    </a>
+
+                                </div>
+                                <div class="post-title">
+                                    <a href="{% url 'lesson' lesson.pk %}">
+                                        {{ lesson.title }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                            {% endfor %}
+
+
+                        {% endif %}
+
+                    </div>
+                </div>
+                {% if lessons_new %}
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12 mb-3 sidebar sticky-sidebar">
+                        <div class="widget-posts dt-sn dt-sl rounded-0 border-bottom mb-3">
+                            <div class="title-sidebar dt-sl mb-3">
+                                <h3>جدیدترین ها</h3>
+                            </div>
+                            <div class="content-sidebar dt-sl">
+                                {% for lesso in lessons_new %}
+                                    <div class="item">
+                                        <div class="item-inner">
+                                            <div class="item-thumb">
+                                                <a href="{% url 'lesson' lesso.pk %}" class="img-holder"
+                                                   style="background-image: url('{% if lesso.image %}{{ lesso.image.url }}{% endif %}')"></a>
+                                            </div>
+                                            <p class="title">
+                                                <a href="{% url 'lesson' lesso.pk %}">{{ lesso.title }}</a>
+                                            </p>
+                                            <div class="item-meta">
+                                                <span class="time">{{ lesso.date }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <!-- End main-content -->
+{% endblock %}
+
+

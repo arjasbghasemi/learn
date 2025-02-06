@@ -50,10 +50,11 @@ class Lesson(models.Model):
     image = models.ImageField(upload_to="lessons/image/",blank=True,null=True)
     video = models.FileField(upload_to="lessons/video/",blank=True,null=True)
     voice = models.FileField(upload_to="lessons/voice/",blank=True,null=True)
+    pdf=models.FileField(upload_to="lessons/pdf/",blank=True,null=True)
     text = models.TextField(blank=True,null=True)
     views = models.IntegerField(default=0)
     date = models.DateField(default=datetime.now)
-    value=models.IntegerField(default=0,unique=True)
+    main_page=models.BooleanField(default=True)
     def __str__(self):
         return self.title
 
@@ -67,12 +68,7 @@ class Comment(models.Model):
     def __str__(self):
         return self.title
 
-
-
-class UserLessons(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
-    lessons=models.ManyToManyField(Lesson,blank=True,null=True)
-    def __str__(self):
-        return str(self.user)
-
-
+class Link(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    title=models.CharField(max_length=255,blank=True,null=True)
+    url=models.URLField(blank=True,null=True)

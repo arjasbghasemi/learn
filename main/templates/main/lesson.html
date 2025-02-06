@@ -81,8 +81,25 @@
                                     </audio>
                                 </div>
                             {% endif %}
-
                             {{ lesson.text }}
+                        <br>
+                        {% if lesson.pdf %}
+                        		<div class="pt-3 pb-2">
+                                    <h5>دانلود pdf:</h5>
+                                    <a href="{% url 'download_file' lesson.pk %}">اینجا کلیک کنید</a>
+                                </div>
+                        	
+                        {% endif %} 
+                        {% if lesson_links %}
+                        	{% for lesson_link in lesson_links %}
+                        		<div class="pt-3 pb-2">
+                                    <h5>{{ lesson_link.title }}:</h5>
+                                    <a href="{{ lesson_link.url}}">اینجا کلیک کنید</a>
+                                </div>
+                        	{% endfor %}
+                        	
+                        {% endif %} 
+                        
                         </div>
                     </div>
                 </div>
